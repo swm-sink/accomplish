@@ -1,13 +1,13 @@
 export const USE_CASE_KEYS = [
-  { key: 'calendarPrepNotes', icons: ['calendar.google.com', 'docs.google.com'] },
-  { key: 'inboxPromoCleanup', icons: ['mail.google.com'] },
-  { key: 'competitorPricingDeck', icons: ['slides.google.com', 'sheets.google.com'] },
-  { key: 'notionApiAudit', icons: ['notion.so'] },
-  { key: 'stagingVsProdVisual', icons: ['google.com'] },
-  { key: 'prodBrokenLinks', icons: ['google.com'] },
-  { key: 'portfolioMonitoring', icons: ['finance.yahoo.com'] },
-  { key: 'jobApplicationAutomation', icons: ['linkedin.com'] },
-  { key: 'eventCalendarBuilder', icons: ['eventbrite.com', 'calendar.google.com'] },
+  { key: 'saasMetricsDashboard', icons: ['sheets.google.com'] },
+  { key: 'budgetVsActuals', icons: ['sheets.google.com', 'slides.google.com'] },
+  { key: 'expenseReportProcess', icons: ['sheets.google.com', 'docs.google.com'] },
+  { key: 'boardDeckPrep', icons: ['slides.google.com', 'sheets.google.com'] },
+  { key: 'revenueRecognition', icons: ['sheets.google.com'] },
+  { key: 'vendorContractReview', icons: ['docs.google.com', 'google.com'] },
+  { key: 'earningsCallPrep', icons: ['docs.google.com', 'finance.yahoo.com'] },
+  { key: 'secFilingResearch', icons: ['google.com', 'docs.google.com'] },
+  { key: 'financialModelUpdate', icons: ['sheets.google.com'] },
 ] as const;
 
 export const FAVORITES_PREVIEW_COUNT = 6;

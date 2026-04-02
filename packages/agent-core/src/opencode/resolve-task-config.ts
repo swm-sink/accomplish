@@ -16,6 +16,8 @@ import type { BrowserConfig } from './generator-mcp.js';
 import { isTokenExpired, refreshAccessToken } from '../connectors/oauth-tokens.js';
 import { getKnowledgeNotesForPrompt } from '../storage/repositories/knowledgeNotes.js';
 import { buildProviderConfigs } from './config-builder.js';
+import { resolveProjectContext } from './project-context.js';
+import { getTasks } from '../storage/repositories/taskHistory.js';
 
 export interface ResolveTaskConfigOptions {
   /** Storage API for reading connectors, cloud browser, sandbox, etc. */
@@ -53,6 +55,12 @@ export interface ResolveTaskConfigOptions {
    * If provided, workspace knowledge notes are loaded and injected.
    */
   workspaceId?: string;
+
+  /**
+   * Working directory for the task. If provided, .accomplish.md files
+   * are loaded from this directory (and parent dirs) as project context.
+   */
+  workingDirectory?: string;
 
   /**
    * Logger function for non-fatal warnings.
@@ -124,6 +132,36 @@ export async function resolveTaskConfig(
     }
   }
 
+  // 6. Resolve .accomplish.md project context from working directory
+  let projectContext: string | undefined;
+  if (options.workingDirectory) {
+    try {
+      projectContext = resolveProjectContext(options.workingDirectory);
+    } catch (error) {
+      log('WARN', '[resolveTaskConfig] Failed to load project context', {
+        err: String(error),
+      });
+    }
+  }
+
+  // 7. Resolve recent task summaries for cross-task memory
+  let recentTaskSummaries: string | undefined;
+  if (workspaceId) {
+    try {
+      const tasks = getTasks(workspaceId);
+      const completed = tasks.filter((t) => t.status === 'completed' && t.summary).slice(0, 5);
+      if (completed.length > 0) {
+        recentTaskSummaries = completed
+          .map((t) => `- [${t.completedAt}] ${t.prompt} → ${t.summary}`)
+          .join('\n');
+      }
+    } catch (error) {
+      log('WARN', '[resolveTaskConfig] Failed to load task summaries', {
+        err: String(error),
+      });
+    }
+  }
+
   return {
     configOptions: {
       platform,
@@ -142,6 +180,8 @@ export async function resolveTaskConfig(
       connectors: connectors.length > 0 ? connectors : undefined,
       browser,
       knowledgeNotes,
+      projectContext,
+      recentTaskSummaries,
     },
   };
 }

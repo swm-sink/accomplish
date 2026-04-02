@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import type { KnowledgeNote, KnowledgeNoteType } from '@accomplish_ai/agent-core';
 
 const NOTE_TYPES: KnowledgeNoteType[] = ['context', 'instruction', 'reference'];
-const MAX_CONTENT_LENGTH = 500;
+const MAX_CONTENT_LENGTH = 2000;
 
 function typeBadgeColor(type: KnowledgeNoteType): string {
   switch (type) {

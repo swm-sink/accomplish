@@ -47,6 +47,10 @@ export interface ConfigGeneratorOptions {
   }>;
   /** Formatted workspace knowledge notes to inject into the system prompt */
   knowledgeNotes?: string;
+  /** Project context loaded from .accomplish.md files in the working directory */
+  projectContext?: string;
+  /** Recent task summaries for cross-task memory */
+  recentTaskSummaries?: string;
   /**
    * Custom config file name (default: 'opencode.json').
    * Use a per-task name (e.g. 'opencode-tsk_abc123.json') to prevent
@@ -168,6 +172,41 @@ ${options.knowledgeNotes}
 </workspace-knowledge>
 `;
     systemPrompt += knowledgeSection;
+  }
+
+  if (options.projectContext) {
+    const projectSection = `
+
+<project-context>
+##############################################################################
+# PROJECT CONTEXT - Loaded from .accomplish.md in the working directory
+##############################################################################
+
+The following context was loaded from .accomplish.md files in the project
+directory. Use this information alongside workspace knowledge notes.
+
+${options.projectContext}
+
+##############################################################################
+</project-context>
+`;
+    systemPrompt += projectSection;
+  }
+
+  if (options.recentTaskSummaries) {
+    const historySection = `
+
+<recent-task-history>
+##############################################################################
+# RECENT TASK HISTORY - Completed tasks in this workspace (for context only)
+##############################################################################
+
+${options.recentTaskSummaries}
+
+##############################################################################
+</recent-task-history>
+`;
+    systemPrompt += historySection;
   }
 
   if (!bundledNodeBinPath) {

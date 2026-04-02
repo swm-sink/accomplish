@@ -10,6 +10,14 @@ vi.mock('../../../src/storage/repositories/knowledgeNotes.js', () => ({
   getKnowledgeNotesForPrompt: vi.fn(() => null),
 }));
 
+vi.mock('../../../src/opencode/project-context.js', () => ({
+  resolveProjectContext: vi.fn(() => undefined),
+}));
+
+vi.mock('../../../src/storage/repositories/taskHistory.js', () => ({
+  getTasks: vi.fn(() => []),
+}));
+
 vi.mock('../../../src/opencode/config-builder.js', () => ({
   buildProviderConfigs: vi.fn(async () => ({
     providerConfigs: [{ id: 'anthropic', options: {} }],
@@ -21,6 +29,8 @@ vi.mock('../../../src/opencode/config-builder.js', () => ({
 const { resolveTaskConfig } = await import('../../../src/opencode/resolve-task-config.js');
 const { getKnowledgeNotesForPrompt } =
   await import('../../../src/storage/repositories/knowledgeNotes.js');
+const { resolveProjectContext } = await import('../../../src/opencode/project-context.js');
+const { getTasks } = await import('../../../src/storage/repositories/taskHistory.js');
 
 function createMockStorage() {
   return {
@@ -171,5 +181,129 @@ describe('resolveTaskConfig', () => {
     expect(result.configOptions.authToken).toBe('tok-123');
     expect(result.configOptions.permissionApiPort).toBe(9999);
     expect(result.configOptions.questionApiPort).toBe(8888);
+  });
+
+  it('resolves project context when workingDirectory is provided', async () => {
+    const storage = createMockStorage();
+    const mockResolve = vi.mocked(resolveProjectContext);
+    mockResolve.mockReturnValue('# Finance Context\nChart of accounts');
+
+    const result = await resolveTaskConfig({
+      storage,
+      platform: 'darwin',
+      mcpToolsPath: '/tools',
+      userDataPath: '/data',
+      isPackaged: false,
+      getApiKey: () => null,
+      workingDirectory: '/finance/data',
+    });
+
+    expect(mockResolve).toHaveBeenCalledWith('/finance/data');
+    expect(result.configOptions.projectContext).toBe('# Finance Context\nChart of accounts');
+  });
+
+  it('does not resolve project context when workingDirectory is not provided', async () => {
+    const storage = createMockStorage();
+    const mockResolve = vi.mocked(resolveProjectContext);
+    mockResolve.mockClear();
+
+    const result = await resolveTaskConfig({
+      storage,
+      platform: 'darwin',
+      mcpToolsPath: '/tools',
+      userDataPath: '/data',
+      isPackaged: false,
+      getApiKey: () => null,
+    });
+
+    expect(mockResolve).not.toHaveBeenCalled();
+    expect(result.configOptions.projectContext).toBeUndefined();
+  });
+
+  it('loads recent task summaries when workspaceId is provided', async () => {
+    const storage = createMockStorage();
+    const mockGetTasks = vi.mocked(getTasks);
+    mockGetTasks.mockReturnValue([
+      {
+        id: 't1',
+        prompt: 'Update SaaS dashboard',
+        summary: 'Updated MRR to $1.2M',
+        status: 'completed',
+        messages: [],
+        createdAt: '2026-03-01',
+        completedAt: '2026-03-01',
+      },
+      {
+        id: 't2',
+        prompt: 'Run budget variance',
+        summary: 'Q1 variance is -3%',
+        status: 'completed',
+        messages: [],
+        createdAt: '2026-03-02',
+        completedAt: '2026-03-02',
+      },
+    ] as never);
+
+    const result = await resolveTaskConfig({
+      storage,
+      platform: 'darwin',
+      mcpToolsPath: '/tools',
+      userDataPath: '/data',
+      isPackaged: false,
+      getApiKey: () => null,
+      workspaceId: 'ws-finance',
+    });
+
+    expect(result.configOptions.recentTaskSummaries).toBeDefined();
+    expect(result.configOptions.recentTaskSummaries).toContain('Update SaaS dashboard');
+    expect(result.configOptions.recentTaskSummaries).toContain('Updated MRR to $1.2M');
+    expect(result.configOptions.recentTaskSummaries).toContain('Run budget variance');
+  });
+
+  it('limits task summaries to 5 most recent completed tasks', async () => {
+    const storage = createMockStorage();
+    const mockGetTasks = vi.mocked(getTasks);
+    const tasks = Array.from({ length: 10 }, (_, i) => ({
+      id: `t${i}`,
+      prompt: `Task ${i}`,
+      summary: `Summary ${i}`,
+      status: 'completed' as const,
+      messages: [],
+      createdAt: `2026-03-${String(i + 1).padStart(2, '0')}`,
+      completedAt: `2026-03-${String(i + 1).padStart(2, '0')}`,
+    }));
+    mockGetTasks.mockReturnValue(tasks as never);
+
+    const result = await resolveTaskConfig({
+      storage,
+      platform: 'darwin',
+      mcpToolsPath: '/tools',
+      userDataPath: '/data',
+      isPackaged: false,
+      getApiKey: () => null,
+      workspaceId: 'ws-finance',
+    });
+
+    // Should only contain first 5 tasks (most recent from getTasks)
+    const lines = result.configOptions.recentTaskSummaries!.split('\n');
+    expect(lines).toHaveLength(5);
+  });
+
+  it('returns undefined for task summaries when no completed tasks exist', async () => {
+    const storage = createMockStorage();
+    const mockGetTasks = vi.mocked(getTasks);
+    mockGetTasks.mockReturnValue([]);
+
+    const result = await resolveTaskConfig({
+      storage,
+      platform: 'darwin',
+      mcpToolsPath: '/tools',
+      userDataPath: '/data',
+      isPackaged: false,
+      getApiKey: () => null,
+      workspaceId: 'ws-empty',
+    });
+
+    expect(result.configOptions.recentTaskSummaries).toBeUndefined();
   });
 });

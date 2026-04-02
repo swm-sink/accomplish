@@ -4,7 +4,7 @@ import type { KnowledgeNoteType } from '@accomplish_ai/agent-core';
 import { Textarea } from '@/components/ui/textarea';
 
 const NOTE_TYPES: KnowledgeNoteType[] = ['context', 'instruction', 'reference'];
-const MAX_CONTENT_LENGTH = 500;
+const MAX_CONTENT_LENGTH = 2000;
 
 interface AddNoteFormProps {
   newType: KnowledgeNoteType;

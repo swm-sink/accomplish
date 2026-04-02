@@ -885,5 +885,54 @@ describe('ConfigGenerator', () => {
       expect(result.systemPrompt).toContain('available-skills');
       expect(result.systemPrompt).toContain('test-skill');
     });
+
+    it('should inject project-context section when projectContext is provided', () => {
+      const result = generateConfig({
+        platform: 'darwin',
+        mcpToolsPath,
+        userDataPath,
+        isPackaged: false,
+        bundledNodeBinPath: sharedBundledNodeBinPath,
+        projectContext: '# Finance Team Context\nChart of accounts: 1000-Assets',
+      });
+      expect(result.systemPrompt).toContain('<project-context>');
+      expect(result.systemPrompt).toContain('# Finance Team Context');
+      expect(result.systemPrompt).toContain('Chart of accounts: 1000-Assets');
+    });
+
+    it('should NOT inject project-context section when projectContext is undefined', () => {
+      const result = generateConfig({
+        platform: 'darwin',
+        mcpToolsPath,
+        userDataPath,
+        isPackaged: false,
+        bundledNodeBinPath: sharedBundledNodeBinPath,
+      });
+      expect(result.systemPrompt).not.toContain('<project-context>');
+    });
+
+    it('should inject recent-task-history section when recentTaskSummaries is provided', () => {
+      const result = generateConfig({
+        platform: 'darwin',
+        mcpToolsPath,
+        userDataPath,
+        isPackaged: false,
+        bundledNodeBinPath: sharedBundledNodeBinPath,
+        recentTaskSummaries: '- [2026-03-01] Update dashboard → MRR is $1.2M',
+      });
+      expect(result.systemPrompt).toContain('<recent-task-history>');
+      expect(result.systemPrompt).toContain('Update dashboard');
+    });
+
+    it('should NOT inject recent-task-history when recentTaskSummaries is undefined', () => {
+      const result = generateConfig({
+        platform: 'darwin',
+        mcpToolsPath,
+        userDataPath,
+        isPackaged: false,
+        bundledNodeBinPath: sharedBundledNodeBinPath,
+      });
+      expect(result.systemPrompt).not.toContain('<recent-task-history>');
+    });
   });
 });

@@ -12,8 +12,8 @@ const NOTE_TYPE_LABELS: Record<KnowledgeNoteType, string> = {
   reference: 'Reference',
 };
 
-const MAX_NOTES_PER_WORKSPACE = 20;
-const MAX_CONTENT_LENGTH = 500;
+const MAX_NOTES_PER_WORKSPACE = 50;
+const MAX_CONTENT_LENGTH = 2000;
 
 function createNoteId(): string {
   return `kn_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;

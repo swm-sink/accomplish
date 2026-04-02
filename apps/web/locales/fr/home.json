@@ -17,50 +17,50 @@
   },
   "examplePrompts": "Exemples de requêtes",
   "useCases": {
-    "calendarPrepNotes": {
-      "title": "Préparation réunions",
-      "description": "Consultez les réunions de demain et rédigez des notes de préparation.",
-      "prompt": "Consultez mon Google Agenda pour les réunions de demain et rédigez des notes de préparation dans un nouveau Google Doc."
+    "saasMetricsDashboard": {
+      "title": "Tableau de bord SaaS",
+      "description": "Construisez un tableau de bord avec MRR, ARR, churn, LTV et CAC.",
+      "prompt": "Construisez un tableau de bord de métriques SaaS dans Google Sheets avec MRR, ARR, taux de churn, LTV et CAC à partir de mes données d'abonnement."
     },
-    "inboxPromoCleanup": {
-      "title": "Nettoyage des promotions",
-      "description": "Supprimez les e-mails promotionnels des dernières 24 heures.",
-      "prompt": "Allez dans ma boîte Gmail et supprimez tous les e-mails promotionnels des dernières 24 heures."
+    "budgetVsActuals": {
+      "title": "Budget vs Réalisé",
+      "description": "Comparez les réalisés au budget avec analyse des écarts.",
+      "prompt": "Comparez les réalisés de ce mois avec le budget dans Google Sheets, calculez les écarts et créez un résumé dans Google Slides."
     },
-    "competitorPricingDeck": {
-      "title": "Analyse tarifaire concurrentielle",
-      "description": "Analysez les tarifs concurrents et rédigez une diapositive avec des recommandations.",
-      "prompt": "Récupérez les tarifs et fonctionnalités de ces 5 sites concurrents [liste des URL], enregistrez dans un CSV, analysez nos écarts de prix et rédigez une diapositive de recommandation dans Google Slides pour la réunion de lundi."
+    "expenseReportProcess": {
+      "title": "Traitement des notes de frais",
+      "description": "Catégorisez les dépenses et générez un rapport formaté.",
+      "prompt": "Traitez ces reçus de dépenses, catégorisez-les par code GL, signalez les violations de politique et générez un rapport dans Google Sheets."
     },
-    "notionApiAudit": {
-      "title": "Audit API Notion",
-      "description": "Parcourez un wiki Notion pour trouver les anciennes mentions d'API avec liens directs.",
-      "prompt": "Parcourez ce wiki Notion à [URL] et trouvez toutes les mentions de l'ancienne API, en les listant avec les liens des pages."
+    "boardDeckPrep": {
+      "title": "Préparation du deck CA",
+      "description": "Compilez les métriques financières dans un deck pour le conseil.",
+      "prompt": "Compilez les métriques financières clés depuis mes Google Sheets et créez un deck pour le conseil dans Google Slides."
     },
-    "stagingVsProdVisual": {
-      "title": "Comparaison visuelle Staging/Prod",
-      "description": "Comparez visuellement le staging et la production avec des captures d'écran.",
-      "prompt": "Comparez mon site de staging à [URL] avec la production à [URL] et capturez les différences visuelles."
+    "revenueRecognition": {
+      "title": "Reconnaissance des revenus",
+      "description": "Vérifiez les données d'abonnement selon les critères ASC 606.",
+      "prompt": "Vérifiez les données de revenus d'abonnement dans ce Google Sheet selon les critères ASC 606."
     },
-    "prodBrokenLinks": {
-      "title": "Liens cassés en production",
-      "description": "Vérifiez les liens cassés sur mon site web.",
-      "prompt": "Ouvrez [URL], cliquez sur chaque lien et signalez les erreurs 404."
+    "vendorContractReview": {
+      "title": "Revue de contrat fournisseur",
+      "description": "Extrayez les termes clés et signalez les risques d'un contrat.",
+      "prompt": "Examinez ce contrat fournisseur et extrayez les termes clés, dates de renouvellement, tarifs et risques dans un Google Doc."
     },
-    "portfolioMonitoring": {
-      "title": "Suivi de portefeuille",
-      "description": "Surveillez les cours des actions et alertez en cas de baisses et de hausses.",
-      "prompt": "Surveillez mon portefeuille d'actions sur [site de courtage], alertez en cas de baisses et de hausses de prix."
+    "earningsCallPrep": {
+      "title": "Préparation résultats",
+      "description": "Recherchez les métriques des pairs et rédigez des points de discussion.",
+      "prompt": "Recherchez les métriques des entreprises comparables sur Yahoo Finance et rédigez des points de discussion dans Google Docs."
     },
-    "jobApplicationAutomation": {
-      "title": "Automatisation des candidatures",
-      "description": "Filtrez les offres d'emploi et soumettez des candidatures avec les profils enregistrés.",
-      "prompt": "Trouvez les offres d'emploi sur LinkedIn pour [requête], triez par salaire et postulez aux 5 meilleures avec mon profil."
+    "secFilingResearch": {
+      "title": "Recherche SEC",
+      "description": "Recherchez les dépôts des concurrents et résumez les données clés.",
+      "prompt": "Recherchez les dépôts 10-K des concurrents sur SEC EDGAR et résumez les données financières clés dans un Google Doc."
     },
-    "eventCalendarBuilder": {
-      "title": "Création de calendrier d'événements",
-      "description": "Sélectionnez les meilleurs événements et ajoutez-les au calendrier.",
-      "prompt": "Parcourez les événements sur Eventbrite, filtrez par lieu et ajoutez les 5 meilleurs à mon calendrier."
+    "financialModelUpdate": {
+      "title": "Mise à jour du modèle financier",
+      "description": "Mettez à jour un modèle de prévision avec les derniers réalisés.",
+      "prompt": "Mettez à jour le modèle de prévision dans ce Google Sheet avec les derniers réalisés mensuels et recalculez les projections."
     }
   },
   "favorites": {

@@ -27,50 +27,50 @@
   },
   "examplePrompts": "Example Prompts",
   "useCases": {
-    "calendarPrepNotes": {
-      "title": "Calendar Prep Notes",
-      "description": "Review tomorrow's meetings and draft a prep notes doc.",
-      "prompt": "Check my Google Calendar for tomorrow's meetings and draft preparation notes in a new Google Doc."
+    "saasMetricsDashboard": {
+      "title": "SaaS Metrics Dashboard",
+      "description": "Build a dashboard with MRR, ARR, churn, LTV, and CAC.",
+      "prompt": "Build a SaaS metrics dashboard in Google Sheets with MRR, ARR, churn rate, LTV, and CAC from my subscription data."
     },
-    "inboxPromoCleanup": {
-      "title": "Inbox Promo Cleanup",
-      "description": "Clear promotional emails from the last 24 hours.",
-      "prompt": "Go to my Gmail inbox and delete all promotional emails from the last 24 hours."
+    "budgetVsActuals": {
+      "title": "Budget vs Actuals",
+      "description": "Compare actuals against budget with variance analysis.",
+      "prompt": "Compare this month's actuals against budget in Google Sheets, calculate variances, and create a summary slide in Google Slides."
     },
-    "competitorPricingDeck": {
-      "title": "Competitor Pricing Deck",
-      "description": "Analyze competitor pricing and draft a slide with recommendations.",
-      "prompt": "Pull pricing and features from these 5 competitor sites [list URLs], save to a CSV, analyze our pricing gaps, and draft a recommendation slide in Google Slides for Monday's meeting."
+    "expenseReportProcess": {
+      "title": "Expense Report Processing",
+      "description": "Categorize expenses and generate a formatted report.",
+      "prompt": "Process these expense receipts, categorize them by GL code, flag any policy violations, and generate a formatted expense report in Google Sheets."
     },
-    "notionApiAudit": {
-      "title": "Notion API Audit",
-      "description": "Scan a Notion wiki for old API mentions with direct links.",
-      "prompt": "Read through this Notion wiki at [URL] and find all mentions of the old API, listing them with page links."
+    "boardDeckPrep": {
+      "title": "Board Deck Prep",
+      "description": "Pull financial metrics into a board meeting deck.",
+      "prompt": "Pull key financial metrics from my Google Sheets and create a board meeting deck in Google Slides with MRR trends, burn rate, and runway."
     },
-    "stagingVsProdVisual": {
-      "title": "Staging vs Prod Visual Check",
-      "description": "Compare staging and production visuals with screenshots.",
-      "prompt": "Compare my staging site at [URL] to production at [URL] and screenshot any visual differences."
+    "revenueRecognition": {
+      "title": "Revenue Recognition",
+      "description": "Review subscription data against ASC 606 criteria.",
+      "prompt": "Review the subscription revenue data in this Google Sheet against ASC 606 recognition criteria and flag any items needing adjustment."
     },
-    "prodBrokenLinks": {
-      "title": "Production Broken Links",
-      "description": "Check my website for broken links.",
-      "prompt": "Open [URL], click through every link, and report any 404 errors."
+    "vendorContractReview": {
+      "title": "Vendor Contract Review",
+      "description": "Extract key terms and flag risks from a vendor contract.",
+      "prompt": "Review this vendor contract and extract key terms, renewal dates, pricing, termination clauses, and risk flags into a Google Doc summary."
     },
-    "portfolioMonitoring": {
-      "title": "Portfolio Monitoring",
-      "description": "Watch stock prices, and alert on drops and spikes.",
-      "prompt": "Monitor my stock portfolio on [broker site], alert on price drops and spikes."
+    "earningsCallPrep": {
+      "title": "Earnings Call Prep",
+      "description": "Research peer metrics and draft talking points.",
+      "prompt": "Research peer company metrics on Yahoo Finance and draft earnings call talking points in Google Docs with key financial comparisons."
     },
-    "jobApplicationAutomation": {
-      "title": "Job Application Automation",
-      "description": "Filter jobs and submit applications with saved profiles.",
-      "prompt": "Find job listings from LinkedIn for [query], sort by salary, and apply to the top 5 using my profile."
+    "secFilingResearch": {
+      "title": "SEC Filing Research",
+      "description": "Search competitor filings and summarize key data.",
+      "prompt": "Search SEC EDGAR for competitor 10-K filings, extract key financial data, and summarize findings in a Google Doc."
     },
-    "eventCalendarBuilder": {
-      "title": "Event Calendar Builder",
-      "description": "Select top events and add them to the calendar.",
-      "prompt": "Scrape event listings from Eventbrite, filter by location, and add top 5 to my calendar."
+    "financialModelUpdate": {
+      "title": "Financial Model Update",
+      "description": "Update a forecasting model with latest actuals.",
+      "prompt": "Update the forecasting model in this Google Sheet with the latest monthly actuals and recalculate projections for the next 12 months."
     }
   },
   "selectFolder": "Select Folder",
